@@ -1,9 +1,21 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import type { NextPage } from "next";
+import Head from "next/head";
+import Image from "next/image";
+import { useContractWrite, usePrepareContractWrite } from "wagmi";
+import styles from "../styles/Home.module.css";
+import verbsDAOGovernance from "../data/VerbsDAOGovernance.json";
+import { Button, HStack, Spacer, Text, VStack } from "@chakra-ui/react";
 
 const Home: NextPage = () => {
+  const { config } = usePrepareContractWrite({
+    addressOrName: "0x48ADbf604c7ff9E2b2e8c01b243Ba446538972EA",
+    contractInterface: verbsDAOGovernance.abi,
+    functionName: "voteProposal",
+  });
+
+  const { data: txn, isLoading, isSuccess, write } = useContractWrite(config);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -13,44 +25,139 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.tsx</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+        <Text className={styles.title}>Web3 Infinity DAO</Text>
+        <VStack>
+          <Text>
+            Web3 Infinity DAO. As a member, you can vote on proposals or
+            delegate votes to a third party. You can also create your own
+            proposals.
+          </Text>
+          <HStack className={styles.proposalHeaderContainer}>
+            <Text className={styles.proposalHeader}>Proposals</Text>
+            <Button
+              disabled={!write}
+              onClick={() => write?.()}
+              className={styles.submitButton}
+            >
+              Submit Proposal
+            </Button>
+          </HStack>
+          <VStack className={styles.proposalStack}>
+            <HStack className={styles.proposalContainer}>
+              <Text className={styles.proposalTitle}>
+                #131 Create educational resources regarding IPFS and Filecoin
+                for local community.
+              </Text>
+              <Button
+                disabled={!write}
+                onClick={() => write?.()}
+                className={styles.voteButton}
+              >
+                Vote on Proposal
+              </Button>
+            </HStack>
+            <HStack className={styles.proposalContainer}>
+              <Text className={styles.proposalTitle}>
+                #130 Create a documentary on Filecoin and FIL-Singapore
+                foundings.
+              </Text>
+              <Button
+                disabled={!write}
+                onClick={() => write?.()}
+                className={styles.voteButton}
+              >
+                Vote on Proposal
+              </Button>
+            </HStack>
+            <HStack className={styles.proposalContainer}>
+              <Text className={styles.proposalTitle}>
+                #129 Shoot a rocket into the moon with Web3 Infinity logo on the
+                rocket tip.
+              </Text>
+              <Button
+                disabled={!write}
+                onClick={() => write?.()}
+                className={styles.voteButton}
+              >
+                Vote on Proposal
+              </Button>
+            </HStack>
+            <HStack className={styles.proposalContainer}>
+              <Text className={styles.proposalTitle}>
+                #128 Name a new frog species after Web3 Infinity.
+              </Text>
+              <Button
+                disabled={!write}
+                onClick={() => write?.()}
+                className={styles.voteButton}
+              >
+                Vote on Proposal
+              </Button>
+            </HStack>
+            <HStack className={styles.proposalContainer}>
+              <Text className={styles.proposalTitle}>
+                {`#127 Change the name from "Web3 Infinity" to "Web3 to Infinity and
+                Beyond".`}
+              </Text>
+              <Button
+                disabled={!write}
+                onClick={() => write?.()}
+                className={styles.voteButton}
+              >
+                Vote on Proposal
+              </Button>
+            </HStack>
+            <HStack className={styles.proposalContainer}>
+              <Text className={styles.proposalTitle}>
+                #126 Fund Nintendo and Animoca to create an NFT-based Web3
+                Infinity game powered by IPFS.
+              </Text>
+              <Button
+                disabled={!write}
+                onClick={() => write?.()}
+                className={styles.voteButton}
+              >
+                Vote on Proposal
+              </Button>
+            </HStack>
+            <HStack className={styles.proposalContainer}>
+              <Text className={styles.proposalTitle}>
+                #125 Airdrops for everyone who owns at least 1 FIL!
+              </Text>
+              <Button
+                disabled={!write}
+                onClick={() => write?.()}
+                className={styles.voteButton}
+              >
+                Vote on Proposal
+              </Button>
+            </HStack>
+            <HStack className={styles.proposalContainer}>
+              <Text className={styles.proposalTitle}>
+                #124 Airdrops for everyone who owns at least 1 DOGE!
+              </Text>
+              <Button
+                disabled={!write}
+                onClick={() => write?.()}
+                className={styles.voteButton}
+              >
+                Vote on Proposal
+              </Button>
+            </HStack>
+            <HStack className={styles.proposalContainer}>
+              <Text className={styles.proposalTitle}>
+                #123 Airdrops for everyone who owns at least 1 BTC!
+              </Text>
+              <Button
+                disabled={!write}
+                onClick={() => write?.()}
+                className={styles.voteButton}
+              >
+                Vote on Proposal
+              </Button>
+            </HStack>
+          </VStack>
+        </VStack>
       </main>
 
       <footer className={styles.footer}>
@@ -59,14 +166,14 @@ const Home: NextPage = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
+          Powered by{" "}
           <span className={styles.logo}>
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
         </a>
       </footer>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

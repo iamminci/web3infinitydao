@@ -1,0 +1,17 @@
+.navbar {
+  position: fixed;
+  justify-content: space-between;
+  width: 100%;
+  padding: 2rem;
+  z-index: 100;
+  background: #141d30;
+  border-bottom: 1px solid #2f384b;
+  height: 72px;
+
+  z-index: 10;
+  color: white;
+}
+
+.logo {
+  width: 42px;
+}
